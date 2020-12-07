@@ -18,15 +18,18 @@ int main(int argc, char *argv[]) {
 	while (1) {
 		if (!digitalRead(PIN_SWITCH)) {
 			pressed_count++;
-			delay(200);
 		} else {
-			pressed_count = 0;
-			delay(3000);
+		    if (pressed_count > 0) {
+		        system("screen_toggle");
+		    }
+		    pressed_count = 0;
 		}
 
-		if (pressed_count >= 15) {
+		if (pressed_count >= 20) {
 			system("halt");
 		}
+
+		delay(200);
 	}
 
 	return 0;
